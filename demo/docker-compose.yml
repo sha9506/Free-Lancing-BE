@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: "postgres:12"
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - "postgres_data:/var/lib/postgresql89/data"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  postgres_data:
+    driver: local
