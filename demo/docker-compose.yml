@@ -1,21 +1,19 @@
 version: "3.8"
 
 services:
-  postgres:
-    image: "postgres:12"
-    restart: always
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
     environment:
-      - POSTGRES_PASSWORD=postgres
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - "postgres_data:/var/lib/postgresql89/data"
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "5"
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  postgres_data:
+  mysql_data:
     driver: local
